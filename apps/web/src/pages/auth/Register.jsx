@@ -45,7 +45,7 @@ const Register = () => {
   // If user is already logged in, redirect them from this page
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/dashboard'); // Or any other protected route
+      navigate('/login'); // Or any other protected route
     }
   }, [isAuthenticated, navigate]);
 

@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext'; // Adjust path as needed
 import { FiGrid, FiCalendar, FiFileText, FiUsers, FiSettings, FiLogOut, FiShield } from 'react-icons/fi';
+import { VscFeedback } from "react-icons/vsc";
+
 
 const Sidebar = () => {
   const { user, logout } = useContext(AuthContext);
@@ -9,9 +11,10 @@ const Sidebar = () => {
   // Define navigation links for each role
   const patientLinks = [
     { name: 'Dashboard', path: '/dashboard/patient', icon: <FiGrid /> },
-    { name: 'Appointments', path: '/appointments', icon: <FiCalendar /> },
-    { name: 'Medical Records', path: '/records', icon: <FiFileText /> },
-    { name: 'Find Doctors', path: '/doctors', icon: <FiUsers /> },
+    { name: 'Appointments', path: '/patient/appointments', icon: <FiCalendar /> },
+    { name: 'Payments', path: '/patient/payments', icon: <FiFileText /> },
+    { name: 'Find Doctors', path: '/patient/doctors', icon: <FiUsers /> },
+    { name: 'Feedback', path: '/patient/feedback', icon: <VscFeedback  /> },
   ];
 
   const doctorLinks = [
@@ -79,13 +82,18 @@ const Sidebar = () => {
       {/* User Profile and Logout Section */}
       <div className="p-4 border-t border-care-accent">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 bg-care-primary rounded-full flex items-center justify-center text-white font-bold text-lg">
-            {user ? `${user.firstName[0]}${user.lastName ? user.lastName[0] : ''}`.toUpperCase() : '?'}
-          </div>
-          <div>
-            <p className="font-bold text-care-dark">{user ? `${user.firstName} ${user.lastName}` : 'Loading...'}</p>
-            <p className="text-sm text-gray-500">{user ? user.email : ''}</p>
-          </div>
+          <Link 
+              to={user ? `/${user.role}/profile` : '#'} 
+              className="flex items-center gap-3 mb-4"
+          >
+            <div className="w-10 h-10 bg-care-primary rounded-full flex items-center justify-center text-white font-bold text-lg">
+              {user ? `${user.firstName[0]}${user.lastName ? user.lastName[0] : ''}`.toUpperCase() : '?'}
+            </div>
+            <div>
+              <p className="font-bold text-care-dark">{user ? `${user.firstName} ${user.lastName}` : 'Loading...'}</p>
+              <p className="text-sm text-gray-500">{user ? user.email : ''}</p>
+            </div>
+          </Link>
         </div>
         <Link
           to="/logout"
