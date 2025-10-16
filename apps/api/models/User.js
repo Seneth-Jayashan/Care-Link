@@ -9,7 +9,7 @@ const UserSchema = new Schema({
   lastName: { type: String },
   role: { 
     type: String, 
-    enum: ['patient', 'doctor', 'nurse', 'admin', 'pharmacy', 'staff'], 
+    enum: ['patient', 'doctor', 'hcprovider', 'admin', 'hcmanager', 'staff'], 
     required: true 
   },
   // For quick profile lookups without extra queries

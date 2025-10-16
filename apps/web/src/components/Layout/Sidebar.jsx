@@ -26,9 +26,21 @@ const Sidebar = () => {
   ];
   
   const adminLinks = [
-    { name: 'Dashboard', path: '/admin', icon: <FiShield /> },
+    { name: 'Dashboard', path: '/dashboard/admin', icon: <FiShield /> },
     { name: 'Manage Users', path: '/admin/users', icon: <FiUsers /> },
     { name: 'Manage Doctors', path: '/admin/doctors', icon: <FiUsers /> },
+  ];
+
+  const hcpLinks = [
+    { name: 'Dashboard', path: '/dashboard/hcprovider', icon: <FiShield /> },
+    { name: 'Manage Users', path: '/hcprovider/users', icon: <FiUsers /> },
+    { name: 'Manage Doctors', path: '/hcprovider/doctors', icon: <FiUsers /> },
+  ];
+
+    const hcmLinks = [
+    { name: 'Dashboard', path: 'dashboard/hcmanager', icon: <FiShield /> },
+    { name: 'Manage Users', path: '/hcmanager/users', icon: <FiUsers /> },
+    { name: 'Manage Doctors', path: '/hcmanager/doctors', icon: <FiUsers /> },
   ];
 
   // Determine which links to show based on user role
@@ -43,6 +55,12 @@ const Sidebar = () => {
         break;
       case 'admin':
         navLinks = adminLinks;
+        break;
+      case 'hcprovider':
+        navLinks = hcpLinks;
+        break;
+      case 'hcmanager':
+        navLinks = hcmLinks;
         break;
       default:
         navLinks = [];

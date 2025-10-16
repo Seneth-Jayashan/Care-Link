@@ -32,6 +32,10 @@ import PatientProfile from './pages/patients/Profile';
 
 import AdminPanel from './pages/admin/Dashboard';
 
+import HCPDashboard from './pages/healthCareProvider/Dashboard';
+
+import HCMDashboard from './pages/healthCareManager/Dashboard';
+
 
 
 function App() {
@@ -66,10 +70,26 @@ function App() {
           } 
         />
         <Route 
-          path="/admin"
+          path="/dashboard/admin"
           element={
             <RoleBasedAccess allowedRoles={['admin']}>
               <AdminPanel />
+            </RoleBasedAccess>
+          } 
+        />
+        <Route 
+          path="/dashboard/hcprovider"
+          element={
+            <RoleBasedAccess allowedRoles={['admin']}>
+              <HCPDashboard />
+            </RoleBasedAccess>
+          } 
+        />
+        <Route 
+          path="/dashboard/hcmanager"
+          element={
+            <RoleBasedAccess allowedRoles={['admin']}>
+              <HCMDashboard />
             </RoleBasedAccess>
           } 
         />
