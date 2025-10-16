@@ -80,7 +80,7 @@ function App() {
         <Route 
           path="/dashboard/hcprovider"
           element={
-            <RoleBasedAccess allowedRoles={['admin']}>
+            <RoleBasedAccess allowedRoles={['hcprovider']}>
               <HCPDashboard />
             </RoleBasedAccess>
           } 
@@ -88,7 +88,7 @@ function App() {
         <Route 
           path="/dashboard/hcmanager"
           element={
-            <RoleBasedAccess allowedRoles={['admin']}>
+            <RoleBasedAccess allowedRoles={['hcmanager']}>
               <HCMDashboard />
             </RoleBasedAccess>
           } 

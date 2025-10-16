@@ -38,7 +38,7 @@ const Sidebar = () => {
   ];
 
     const hcmLinks = [
-    { name: 'Dashboard', path: 'dashboard/hcmanager', icon: <FiShield /> },
+    { name: 'Dashboard', path: '/dashboard/hcmanager', icon: <FiShield /> },
     { name: 'Manage Users', path: '/hcmanager/users', icon: <FiUsers /> },
     { name: 'Manage Doctors', path: '/hcmanager/doctors', icon: <FiUsers /> },
   ];

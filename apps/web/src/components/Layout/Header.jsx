@@ -21,7 +21,11 @@ const Header = () => {
       case 'doctor':
         return '/dashboard/doctor';
       case 'admin':
-        return '/admin';
+        return '/dashboard/admin';
+      case 'hcmanager':
+        return '/dashboard/hcmanager';
+      case 'hcprovider':
+        return '/dashboard/hcprovider';
       default:
         return '/'; // Fallback to home page if role is unknown
     }
