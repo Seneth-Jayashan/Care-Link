@@ -26,7 +26,9 @@ import PatientFeedback from './pages/patients/Feedback';
 import PatientBooking from './pages/patients/BookingPage';
 import PatientProfile from './pages/patients/Profile';
 
+
 import AdminPanel from './pages/admin/Dashboard';
+
 
 
 
@@ -40,6 +42,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/logout" element={<Logout />} />
+        
       </Route>
 
 
@@ -123,6 +126,8 @@ function App() {
       {/* Fallback Route */}
       <Route path="*" element={<NotFound/>} />
     </Routes>
+
+    
   );
 }
 

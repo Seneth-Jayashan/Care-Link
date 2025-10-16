@@ -25,8 +25,10 @@ const Sidebar = () => {
   
   const adminLinks = [
     { name: 'Dashboard', path: '/admin', icon: <FiShield /> },
-    { name: 'Manage Users', path: '/admin/users', icon: <FiUsers /> },
+    { name: 'Manage Users', path: '/admin/manageuser', icon: <FiUsers /> },
     { name: 'Manage Doctors', path: '/admin/doctors', icon: <FiUsers /> },
+    { name: 'Manage Health care provider', path: '/admin/providers', icon: <FiUsers /> },
+    { name: 'Review user Feedback', path: '/admin/feedback', icon: <VscFeedback /> },
   ];
 
   // Determine which links to show based on user role
