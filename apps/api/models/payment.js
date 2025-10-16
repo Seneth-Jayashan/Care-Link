@@ -1,13 +1,20 @@
 import mongoose from 'mongoose';
+const { Schema, model } = mongoose;
 
-const paymentSchema = new mongoose.Schema({
-  appointment: { type: mongoose.Schema.Types.ObjectId, ref: 'Appointment' },
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+const PaymentSchema = new Schema({
+  payer: { type: Schema.Types.ObjectId, ref: 'User' },
+  patient: { type: Schema.Types.ObjectId, ref: 'Patient' },
+  appointment: { type: Schema.Types.ObjectId, ref: 'Appointment' },
+  pharmacyOrder: { type: Schema.Types.ObjectId, ref: 'PharmacyOrder' },
   amount: { type: Number, required: true },
-  method: { type: String, enum: ['local','card','wallet'], default: 'local' },
-  status: { type: String, enum: ['pending','paid','failed'], default: 'pending' },
-  meta: { type: mongoose.Schema.Types.Mixed },
-  createdAt: { type: Date, default: Date.now }
+  currency: { type: String, default: 'LKR' },
+  method: { type: String, enum: ['card','cash','insurance','online','wallet'] },
+  status: { type: String, enum: ['initiated','success','failed','refunded'], default: 'initiated' },
+  providerReference: String,
+  paidAt: Date,
+  metadata: { type: Object }
+}, {
+  timestamps: true
 });
 
-export default mongoose.model('Payment', paymentSchema);
+export default model('Payment', PaymentSchema);

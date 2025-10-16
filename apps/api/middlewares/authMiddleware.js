@@ -1,16 +1,20 @@
 import jwt from 'jsonwebtoken';
-import User from '../models/User.js';
 
-export const protect = async (req, res, next) => {
+export default function authMiddleware(req, res, next) {
+  // Get token from the header
+  const token = req.header('x-auth-token');
+
+  // Check if no token
+  if (!token) {
+    return res.status(401).json({ msg: 'No token, authorization denied' });
+  }
+
+  // Verify token
   try {
-    const token = req.cookies.token || req.headers.authorization?.split(' ')[1];
-    if (!token) { res.status(401); throw new Error('Not authorized, token missing'); }
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findById(decoded.id).select('-password');
-    if (!user) { res.status(401); throw new Error('User not found'); }
-    req.user = user;
+    req.user = decoded.user; // Attach user payload to request object
     next();
   } catch (err) {
-    res.status(401).json({ message: err.message });
+    res.status(401).json({ msg: 'Token is not valid' });
   }
-};
+}

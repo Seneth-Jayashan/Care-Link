@@ -1,12 +1,43 @@
+// routes/api/appointmentRoutes.js
+
 import express from 'express';
-import { protect } from '../middlewares/authMiddleware.js';
-import { authorizeRoles } from '../middlewares/roleMiddleware.js';
-import { createAppointment, getAppointmentsForUser, cancelAppointment } from '../controllers/appointmentController.js';
+import { check } from 'express-validator';
+import * as appointmentController from '../controllers/appointmentController.js';
+import authMiddleware from '../middlewares/authMiddleware.js';
+import authorize from '../middlewares/roleMiddleware.js';
 
 const router = express.Router();
 
-router.post('/', protect, authorizeRoles('patient'), createAppointment);
-router.get('/', protect, getAppointmentsForUser);
-router.post('/:id/cancel', protect, cancelAppointment);
+// @route   POST /api/appointments
+// @desc    Book a new appointment
+// @access  Private (Patient only)
+router.post(
+  '/',
+  [
+    authMiddleware,
+    authorize('patient'),
+    check('doctorId', 'Doctor ID is required').isMongoId(),
+    check('scheduledAt', 'Appointment date is required').isISO8601().toDate(),
+    check('reason', 'Reason for visit is required').not().isEmpty(),
+  ],
+  appointmentController.createAppointment
+);
+
+// @route   GET /api/appointments/my
+// @desc    Get my appointments (for both patients and doctors)
+// @access  Private
+router.get('/my', authMiddleware, appointmentController.getMyAppointments);
+
+// @route   PATCH /api/appointments/:id/status
+// @desc    Update appointment status (confirm/cancel)
+// @access  Private
+router.patch(
+  '/:id/status',
+  [
+    authMiddleware,
+    check('status', 'Status is required').not().isEmpty(),
+  ],
+  appointmentController.updateAppointmentStatus
+);
 
 export default router;

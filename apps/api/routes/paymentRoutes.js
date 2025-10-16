@@ -1,14 +1,46 @@
-// routes/paymentRoutes.js
+// routes/api/paymentRoutes.js
+
 import express from 'express';
-import { protect } from '../middlewares/authMiddleware.js';
-import { createLocalPayment, getPaymentsForUser } from '../controllers/paymentController.js';
+import { check } from 'express-validator';
+import * as paymentController from '../controllers/paymentController.js';
+import authMiddleware from '../middlewares/authMiddleware.js';
+import authorize from '../middlewares/roleMiddleware.js';
 
 const router = express.Router();
 
-// Create a local payment (e.g., cash / manual)
-router.post('/local', protect, createLocalPayment);
+// @route   POST /api/payments/initiate
+// @desc    Initiate a payment for a service
+// @access  Private (Patient only)
+router.post(
+  '/initiate',
+  [
+    authMiddleware,
+    authorize('patient'),
+    check('appointmentId', 'Appointment ID is required').isMongoId(),
+    check('amount', 'Payment amount is required and must be numeric').isNumeric(),
+    check('method', 'Payment method is required').isIn(['card', 'cash', 'online', 'wallet']),
+  ],
+  paymentController.initiateAppointmentPayment
+);
 
-// Get all payments for the logged-in user
-router.get('/', protect, getPaymentsForUser);
+// @route   POST /api/payments/:paymentId/confirm
+// @desc    Confirm a payment (Admin action)
+// @access  Private (Admin, Staff only)
+router.post(
+  '/:paymentId/confirm',
+  authMiddleware,
+  authorize('admin', 'staff'),
+  paymentController.confirmPayment
+);
+
+// @route   GET /api/payments/my-history
+// @desc    Get the logged-in user's payment history
+// @access  Private (Patient only)
+router.get(
+  '/my-history',
+  authMiddleware,
+  authorize('patient'),
+  paymentController.getMyPaymentHistory
+);
 
 export default router;

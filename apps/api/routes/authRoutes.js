@@ -1,22 +1,41 @@
-// routes/authRoutes.js
+// routes/api/authRoutes.js
+
 import express from 'express';
-import { register, login, logout, me, verifyRegistrationOtp, resendOtp, enable2FA, verifyEnable2FA, verify2FA, disable2FA } from '../controllers/authController.js';
-import { protect } from '../middlewares/authMiddleware.js';
+import { check } from 'express-validator';
+import * as authController from '../controllers/authController.js';
+import authMiddleware from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
-router.post('/register', register);
-router.post('/verify-otp', verifyRegistrationOtp);
-router.post('/resend-otp', resendOtp);
+// @route   POST /api/auth/register
+// @desc    Register a new user
+// @access  Public
+router.post(
+  '/register',
+  [
+    check('firstName', 'First name is required').not().isEmpty(),
+    check('email', 'Please include a valid email').isEmail(),
+    check('password', 'Password must be 6 or more characters').isLength({ min: 6 }),
+    check('role', 'Role is required').isIn(['patient', 'doctor', 'admin']), // Customize roles as needed
+  ],
+  authController.register
+);
 
-router.post('/login', login);
-router.post('/verify-2fa', verify2FA); // uses tempToken in Authorization header
-router.post('/logout', protect, logout);
-router.get('/me', protect, me);
+// @route   POST /api/auth/login
+// @desc    Login user
+// @access  Public
+router.post(
+  '/login',
+  [
+    check('email', 'Please include a valid email').isEmail(),
+    check('password', 'Password is required').exists(),
+  ],
+  authController.login
+);
 
-// 2FA management (protected)
-router.post('/2fa/enable', protect, enable2FA);
-router.post('/2fa/verify-enable', protect, verifyEnable2FA);
-router.post('/2fa/disable', protect, disable2FA);
+// @route   GET /api/auth/me
+// @desc    Get current user profile
+// @access  Private
+router.get('/me', authMiddleware, authController.getMe);
 
 export default router;
