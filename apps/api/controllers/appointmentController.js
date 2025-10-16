@@ -1,6 +1,6 @@
 import asyncHandler from 'express-async-handler';
-import Appointment from '../models/appointment.model.js';
-import User from '../models/user.model.js';
+import Appointment from '../models/appointment.js';
+import User from '../models/User.js';
 
 export const createAppointment = asyncHandler(async (req, res) => {
   const { doctorId, scheduledAt, reason } = req.body;

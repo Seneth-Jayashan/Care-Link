@@ -8,7 +8,7 @@ import cookieParser from "cookie-parser";
 import rateLimit from "express-rate-limit";
 import { connectDB } from "./config/db.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
-import routes from "./routes.js";
+// import routes from "./routes.js";
 
 dotenv.config();
 connectDB();
@@ -35,7 +35,7 @@ app.use(
 );
 
 // Routes
-app.use("/api/v1", routes);
+// app.use("/api/v1", routes);
 
 // Error Handler
 app.use(errorHandler);

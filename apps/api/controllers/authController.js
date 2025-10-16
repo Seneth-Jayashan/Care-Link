@@ -1,8 +1,8 @@
 // controllers/authController.js
 import asyncHandler from 'express-async-handler';
 import jwt from 'jsonwebtoken';
-import User from '../models/user.model.js';
-import { sendEmail } from '../utils/emailService.js';
+import User from '../models/User.js';
+//import { sendEmail } from '../utils/emailService.js';
 import { generateAndSaveOtp, verifyOtpForUser } from '../utils/otpService.js';
 import speakeasy from 'speakeasy';
 
