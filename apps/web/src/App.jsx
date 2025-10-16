@@ -17,6 +17,10 @@ import RoleBasedAccess from './components/Auth/RoleBasedAccess';
 import NotFound from './pages/NotFound';
 
 import DoctorDashboard from './pages/doctors/Dashboard';
+import DoctorSchedule from './pages/doctors/Schedules';
+import DoctorPatients from './pages/doctors/Patients';
+import DoctorReports from './pages/doctors/Reports';
+import DoctorProfile from './pages/doctors/Profile';
 
 import PatientDashboard from './pages/patients/Dashboard';
 import PatientAppointment from './pages/patients/Appointment';
@@ -115,6 +119,40 @@ function App() {
           element={
             <RoleBasedAccess allowedRoles={['patient']}>
               <PatientProfile />
+            </RoleBasedAccess>
+          } 
+        />
+
+
+        <Route 
+          path="/doctor/schedule"
+          element={
+            <RoleBasedAccess allowedRoles={['doctor']}>
+              <DoctorSchedule />
+            </RoleBasedAccess>
+          } 
+        />
+        <Route 
+          path="/doctor/patients"
+          element={
+            <RoleBasedAccess allowedRoles={['doctor']}>
+              <DoctorPatients />
+            </RoleBasedAccess>
+          } 
+        />
+        <Route 
+          path="/doctor/reports"
+          element={
+            <RoleBasedAccess allowedRoles={['doctor']}>
+              <DoctorReports />
+            </RoleBasedAccess>
+          } 
+        />
+        <Route 
+          path="/doctor/profile"
+          element={
+            <RoleBasedAccess allowedRoles={['doctor']}>
+              <DoctorProfile />
             </RoleBasedAccess>
           } 
         />

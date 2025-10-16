@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext'; // Adjust path as needed
 import { FiGrid, FiCalendar, FiFileText, FiUsers, FiSettings, FiLogOut, FiShield } from 'react-icons/fi';
+import { TbReport } from "react-icons/tb";
 import { VscFeedback } from "react-icons/vsc";
 
 
@@ -19,8 +20,9 @@ const Sidebar = () => {
 
   const doctorLinks = [
     { name: 'Dashboard', path: '/dashboard/doctor', icon: <FiGrid /> },
-    { name: 'Schedule', path: '/schedule', icon: <FiCalendar /> },
-    { name: 'My Patients', path: '/patients', icon: <FiUsers /> },
+    { name: 'Schedule', path: '/doctor/schedule', icon: <FiCalendar /> },
+    { name: 'My Patients', path: '/doctor/patients', icon: <FiUsers /> },
+    { name: 'Reports', path: '/doctor/reports', icon: <TbReport /> },
   ];
   
   const adminLinks = [
