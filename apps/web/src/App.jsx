@@ -35,6 +35,11 @@ import AdminPanel from './pages/admin/Dashboard';
 import HCPDashboard from './pages/healthCareProvider/Dashboard';
 
 import HCMDashboard from './pages/healthCareManager/Dashboard';
+import HCMSchedule from './pages/healthCareManager/Schedule';
+import HCMAnalysis from './pages/healthCareManager/Analysis';
+import HCMDigitalCard from './pages/healthCareManager/DigitalCard';
+import HCMReports from './pages/healthCareManager/Reports';
+
 
 
 
@@ -173,6 +178,42 @@ function App() {
           element={
             <RoleBasedAccess allowedRoles={['doctor']}>
               <DoctorProfile />
+            </RoleBasedAccess>
+          } 
+        />
+
+
+        <Route 
+          path="/hcmanager/schedule"
+          element={
+            <RoleBasedAccess allowedRoles={['hcmanager']}>
+              <HCMSchedule />
+            </RoleBasedAccess>
+          } 
+        />
+        <Route 
+          path="/hcmanager/analysis"
+          element={
+            <RoleBasedAccess allowedRoles={['hcmanager']}>
+              <HCMAnalysis />
+            </RoleBasedAccess>
+          } 
+        />
+
+        <Route 
+          path="/hcmanager/reports"
+          element={
+            <RoleBasedAccess allowedRoles={['hcmanager']}>
+              <HCMReports />
+            </RoleBasedAccess>
+          } 
+        />
+
+        <Route 
+          path="/hcmanager/digitalcard"
+          element={
+            <RoleBasedAccess allowedRoles={['hcmanager']}>
+              <HCMDigitalCard />
             </RoleBasedAccess>
           } 
         />

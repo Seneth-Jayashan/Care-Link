@@ -4,6 +4,8 @@ import { AuthContext } from '../../context/AuthContext'; // Adjust path as neede
 import { FiGrid, FiCalendar, FiFileText, FiUsers, FiSettings, FiLogOut, FiShield } from 'react-icons/fi';
 import { TbReport } from "react-icons/tb";
 import { VscFeedback } from "react-icons/vsc";
+import { MdOutlineAnalytics } from "react-icons/md";
+
 
 
 const Sidebar = () => {
@@ -37,10 +39,12 @@ const Sidebar = () => {
     { name: 'Manage Doctors', path: '/hcprovider/doctors', icon: <FiUsers /> },
   ];
 
-    const hcmLinks = [
+  const hcmLinks = [
     { name: 'Dashboard', path: '/dashboard/hcmanager', icon: <FiShield /> },
-    { name: 'Manage Users', path: '/hcmanager/users', icon: <FiUsers /> },
-    { name: 'Manage Doctors', path: '/hcmanager/doctors', icon: <FiUsers /> },
+    { name: 'Reports', path: '/hcmanager/reports', icon: <TbReport /> },
+    { name: 'Analysis', path: '/hcmanager/analysis', icon: <MdOutlineAnalytics  /> },
+    { name: 'Schedule', path: '/hcmanager/schedule', icon: <FiCalendar /> },
+    { name: 'Digital Card', path: '/hcmanager/digitalcard', icon: <TbReport /> },
   ];
 
   // Determine which links to show based on user role
